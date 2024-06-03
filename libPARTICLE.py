@@ -87,6 +87,7 @@ def particlePlot(pX,pY,pState,pMaterial,time=0,isaved=0,show=False,**kwargs):
     # plot
     offsetx = 0.1*sidex; offsety = 0.1*sidey
     filename = name+f"-{isaved:04}.png"
+    
     fig,ax = plt.subplots(1,1,figsize=(6,6))
     ax.set_title('time: '+str(round(time,2)))
     ax.set_xlim([0-offsetx,sidex+offsetx])
@@ -124,7 +125,7 @@ def particleMaterials(show=False):
     if (show):
         print('Number of materials: {}'.format(len(materials)))
         for material in materials:
-            print("id: {}\ntype: {}\nradius: {} m\ndensity: {} kg/m3\n".format(material['id'],material['type'],material['radius'],material['density']))
+            print("id: {}\ntype: {}\nradius: {} m\ndensity: {} kg/3\n".format(material['id'],material['type'],material['radius'],material['density']))
     return materials
 
 
@@ -155,6 +156,8 @@ def particleRun(pX,pY,pState,pMaterial,materials,tmax=10,dt=1,TC=10,**kwargs):
     # check for directory for plotting
     if not os.path.isdir(path):
         os.mkdir(path)
+    print('path: ',path)
+    print('name: ',name)
     # mean radius of all particles
     meanRadius = 0.
     for i in range(len(materials)):
