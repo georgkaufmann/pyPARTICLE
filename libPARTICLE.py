@@ -83,7 +83,7 @@ def particlePlot(pX,pY,pState,pMaterial,time=0,isaved=0,show=False,**kwargs):
         if (i=='name'):  name = kwargs[i]
     # check for directory for plotting
     if not os.path.isdir(path):
-        os.mkdir(path)
+        os.makedirs(path)
     # plot
     offsetx = 0.1*sidex; offsety = 0.1*sidey
     filename = name+f"-{isaved:04}.png"
@@ -100,7 +100,8 @@ def particlePlot(pX,pY,pState,pMaterial,time=0,isaved=0,show=False,**kwargs):
             plt.plot(pX[i],pY[i],lw=0,marker='*',markersize=4,color=colors[pMaterial[i]],alpha=1.0)
         if (pState[i]>0):
             plt.plot(pX[i],pY[i],lw=0,marker='o',markersize=4,color=colors[pMaterial[i]],alpha=0.4)
-    plt.savefig(path+'/'+filename)
+    plt.tight_layout()
+    plt.savefig(path+'/'+filename,bbox_inches='tight')
     if (not show):
         plt.close()
     return
@@ -155,7 +156,7 @@ def particleRun(pX,pY,pState,pMaterial,materials,tmax=10,dt=1,TC=10,**kwargs):
         if (i=='TC'): TC = kwargs[i]
     # check for directory for plotting
     if not os.path.isdir(path):
-        os.mkdir(path)
+        os.makedirs(path)
     print('path: ',path)
     print('name: ',name)
     # mean radius of all particles
